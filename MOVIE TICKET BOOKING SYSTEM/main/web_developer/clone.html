@@ -1,0 +1,101 @@
+<html>
+
+  <head>
+    <title>Reaction Tester</title>
+      
+      <style>
+      
+          #shape{
+              height:200px;
+              width:200px;
+              background-color:red;
+              display:none;
+              position:relative;
+              border:1px black solid;
+              
+          }
+          
+      </style>
+     
+  </head>
+    
+  <body>
+       
+      <h1>TEST YOUR REACTIONS !!!</h1>
+      
+      <h3>Click on the boxes as quickly as you can</h3>
+      <p>Your time : <span id="time"> </span></p>
+      <div id="shape" onclick="my()"></div>
+      
+     
+      
+      
+      <script type="text/javascript">
+          
+          function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+          
+           var start = new Date().getTime();
+          
+         function appear(){
+             var top= Math.floor(Math.random()*400);
+              var left= Math.floor(Math.random()*400);
+             var size =  Math.floor(Math.random()*200) +100;
+             
+             if(Math.random()<0.5){
+                document.getElementById("shape").style.borderRadius="50%"; 
+             }else{
+                 document.getElementById("shape").style.borderRadius="0%"; 
+             }
+             
+             
+            // var border= Math.floor(Math.random()*40);
+             
+             document.getElementById("shape").style.top=top+"px";
+             document.getElementById("shape").style.left=left+"px";
+             document.getElementById("shape").style.height=size+"px";
+              document.getElementById("shape").style.width=size+"px";
+             document.getElementById("shape").style.backgroundColor=getRandomColor();
+             
+             
+             
+            // document.getElementById("shape").border-radius=border + "%";
+             
+             document.getElementById("shape").style.display="block";
+              start = new Date().getTime();
+         } 
+         
+        function appear_random(){
+           setTimeout(appear,Math.floor(Math.random()*3000));  
+        }
+          
+        appear_random(); 
+          
+          
+        
+          
+        function  my(){
+             document.getElementById("shape").style.display='none';
+            var end= new Date().getTime();
+            var interval = end-start;
+            document.getElementById("time").innerHTML=interval/1000;
+             appear_random(); 
+          
+            
+        }  
+          
+          
+         
+        
+      </script>
+      
+      
+  </body>    
+
+</html>

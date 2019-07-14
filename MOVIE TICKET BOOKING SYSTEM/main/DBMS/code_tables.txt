@@ -1,0 +1,256 @@
+1)EMP_TABLE
+
+CREATE TABLE EMP_TABLE3(
+EID VARCHAR(3) PRIMARY KEY,
+ENAME VARCHAR(15),
+SALARY REAL,
+AGE INT,
+SUPER VARCHAR(3),
+SID VARCHAR(3)
+);
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2)CONSIGNMENT_TABLE
+
+CREATE TABLE CONSIGNMENT_TABLE3(
+CID VARCHAR(3) PRIMARY KEY,
+CTYPE VARCHAR(15),
+CNMAE VARCHAR(15),
+C_SUPER_ID VARCHAR(3),
+C_QUANTITY INT,
+COST_PER_PIECE REAL,
+CUS_ID VARCHAR(3),
+ARR_DATE DATE,
+DIS_ID VARCHAR(3)
+);
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3)SECTION_TABLE
+
+CREATE TABLE SECTION_TABLE3(
+SID VARCHAR(3) PRIMARY KEY,
+SEC_NAME VARCHAR(15),
+NO_OF_EMP INT,
+SEC_HEAD_ID VARCHAR(3)
+);
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4)CUSTOMER_TABLE
+
+CREATE TABLE CUSTOMER_TABLE3(
+CUS_ID VARCHAR(3) PRIMARY KEY,
+CUS_NAME VARCHAR(15),
+CUS_CONTACT REAL,
+FIRM_NAME VARCHAR(15)
+);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+5)DISPATCH_TABLE
+
+
+CREATE TABLE DISPATCH_TABLE3(
+DIS_ID VARCHAR(3) PRIMARY KEY,
+DRIVER_ID VARCHAR(3),
+CUS_ID VARCHAR(3),
+DIS_DATE DATE
+CID VARCHAR(3)
+);
+
+======================================================================================================================================================================
+
+ALTER COMMANDS
+
+1)EMP_TABLE
+  
+   ALTER TABLE EMP_TABLE3 ADD FOREIGN KEY(SUPER) REFERENCES EMP_TABLE3(EID);
+   ALTER TABLE EMP_TABLE3 ADD FOREIGN KEY(SID) REFERENCES SECTION_TABLE3(SID); 
+  
+
+2)CONSIGNMENT_TABLE
+  
+  ALTER TABLE CONSIGNMENT_TABLE3 ADD FOREIGN KEY(SUPER_ID) REFERENCES EMP_TABLE3(EID);
+  ALTER TABLE CONSIGNMENT_TABLE3 ADD FOREIGN KEY(CUS_ID) REFERENCES CUSTOMER_TABLE3(CUS_ID);  
+  ALTER TABLE CONSIGNMENT_TABLE3 ADD FOREIGN KEY(DIS_ID) REFERENCES DISPATCH_TABLE3(DIS_ID);  
+
+
+3)SECTION_TABLE
+  
+  ALTER TABLE SECTION_TABLE3 ADD FOREIGN KEY(SEC_HEAD_ID) REFERENCES EMP_TABLE3(EID);  
+
+####4)CUSTOMER_TABLE
+
+######  ALTER TABLE CUSTOMER_TABLE ADD FOREIGN KEY(CID) REFERENCES CONSIGNMENT(CID);
+
+5)DISPATCH_TABLE
+  
+  ALTER TABLE DISPATCH_TABLE3 ADD FOREIGN KEY(DRIVER_ID) REFERENCES EMP_TABLE3(EID); 
+
+
+======================================================================================================================================================================
+
+
+INSERT ALL
+INTO EMP_TABLE3 VALUES('E00','RAGHAV',6000,36,'E06','S00')
+INTO EMP_TABLE3 VALUES('E01','PARTH',4000,27,'E09','S01')
+INTO EMP_TABLE3 VALUES('E02','VIDHUSHI',6000,29,'E06','S00')
+INTO EMP_TABLE3 VALUES('E03','PRERNA',6000,25,'E00','S00')
+INTO EMP_TABLE3 VALUES('E04','AAYAD',6000,30,'E00','S00')
+INTO EMP_TABLE3 VALUES('E05','JIBRAN',4000,24,'E01','S01')
+INTO EMP_TABLE3 VALUES('E06','MENKA',10000,42,'E09','S00')
+INTO EMP_TABLE3 VALUES('E07','RAMAN',3000,39,'E09','S02')
+INTO EMP_TABLE3 VALUES('E08','VIBHA',6000,26,'E09','S00')
+SELECT * FROM DUAL;
+  
+ INSERT INTO EMP_TABLE3(EID,ENAME,SALARY,AGE,SUPER) VALUES('E09','RISHI',13000,35,'E09)
+====================================================================================================================================
+INSERT ALL
+INTO SECTION_TABLE3 VALUES('S00','TAILOR',6,'E06')
+INTO SECTION_TABLE3 VALUES('S01','DRIVER',2,'E01')
+INTO SECTION_TABLE3 VALUES('S02','LOGISTICS',1,'E09')
+SELECT * FROM DUAL;
+=================================================================================================================================================================
+
+INSERT INTO CONSIGNMENT_TABLE3(CID,CTYPE,CNMAE,C_SUPER_ID,C_QUANTITY,COST_PER_PIECE,CUS_ID,ARR_DATE) VALUES('R00','COTTON','CLOTH','E07',1750,70,'C00','01-SEP-2018');
+INSERT INTO CONSIGNMENT_TABLE3(CID,CTYPE,CNMAE,C_SUPER_ID,C_QUANTITY,COST_PER_PIECE,CUS_ID,ARR_DATE) VALUES('R01','CHIFFON','CLOTH','E07',2000,120,'C01','15-SEP-2018');
+INSERT INTO CONSIGNMENT_TABLE3(CID,CTYPE,CNMAE,C_SUPER_ID,C_QUANTITY,COST_PER_PIECE,CUS_ID,ARR_DATE) VALUES('R02','DENIM','CLOTH','E07',3000,130,'C03','01-OCT-2018');
+INSERT INTO CONSIGNMENT_TABLE3(CID,CTYPE,CNMAE,C_SUPER_ID,C_QUANTITY,COST_PER_PIECE,CUS_ID,ARR_DATE) VALUES('R03','LEATHER','CLOTH','E07',1250,150,'C07','15-OCT-2018');
+INSERT INTO CONSIGNMENT_TABLE3(CID,CTYPE,CNMAE,C_SUPER_ID,C_QUANTITY,COST_PER_PIECE,CUS_ID,ARR_DATE) VALUES('R04','RAYON','CLOTH','E07',200,40,'C06','30-OCT-2018');
+
+
+INSERT INTO CONSIGNMENT_TABLE3(CID,CTYPE,CNMAE,C_SUPER_ID,C_QUANTITY,COST_PER_PIECE,CUS_ID,DIS_ID) VALUES('F00','DENIM','PANT','E00',1500,800,'C02','D01');
+INSERT INTO CONSIGNMENT_TABLE3(CID,CTYPE,CNMAE,C_SUPER_ID,C_QUANTITY,COST_PER_PIECE,CUS_ID,DIS_ID) VALUES('F01','COTTON','FROCK','E02',1750,250,'C00','D02');
+INSERT INTO CONSIGNMENT_TABLE3(CID,CTYPE,CNMAE,C_SUPER_ID,C_QUANTITY,COST_PER_PIECE,CUS_ID,DIS_ID) VALUES('F02','LEATHER','JACKET','E02',625,900,'C07','D03');
+INSERT INTO CONSIGNMENT_TABLE3(CID,CTYPE,CNMAE,C_SUPER_ID,C_QUANTITY,COST_PER_PIECE,CUS_ID,DIS_ID) VALUES('F03','CHIFFON','SHIRT','E00',1000,600,'C04','D04');
+INSERT INTO CONSIGNMENT_TABLE3(CID,CTYPE,CNMAE,C_SUPER_ID,C_QUANTITY,COST_PER_PIECE,CUS_ID,DIS_ID) VALUES('F04','RAYON','SOCKS','E00',2000,90,'C05','D05');
+
+============================================================================================================================================================
+
+INSERT ALL
+INTO CUSTOMER_TABLE3 VALUES('C00','JAGRUTHA',9902730134,'JR TEXTILES')
+INTO CUSTOMER_TABLE3 VALUES('C01','ARYAN',9845909520,'INDIA FAB')
+INTO CUSTOMER_TABLE3 VALUES('C02','RAHUL',8123069265,'EMERALD')
+INTO CUSTOMER_TABLE3 VALUES('C03','VARUN',6360123456,'APPLEPINE')
+INTO CUSTOMER_TABLE3 VALUES('C04','DEEPTHI',9902713823,'NEW YORK')
+INTO CUSTOMER_TABLE3 VALUES('C05','KAUSHAL',7123456890,'NEXTGEN')
+INTO CUSTOMER_TABLE3 VALUES('C06','SUNAINA',9876543210,'AURA')
+INTO CUSTOMER_TABLE3 VALUES('C07','TANISH',8765432190,'RAYX')
+SELECT * FROM DUAL;
+
+=============================================================================================================================================================
+
+INSERT ALL
+INTO DISPATCH_TABLE3 VALUES('D01','E01','C02','14-OCT-2018','F00')
+INTO DISPATCH_TABLE3 VALUES('D02','E05','C00','02-NOV-2018','F01')
+INTO DISPATCH_TABLE3 VALUES('D03','E01','C07','15-NOV-2018','F02')
+INTO DISPATCH_TABLE3 VALUES('D04','E05','C04','16-NOV-2018','F03')
+INTO DISPATCH_TABLE3 VALUES('D05','E01','C05','30-NOV-2018','F04')
+SELECT * FROM DUAL;
+
+===============================================================================================================================================================
+
+1) FIND THE DETAILS OF THE CUSTOMER WHO BUYS AS WELL AS SELLS TO THE TEXTILE MILL   ==========done
+  
+   SELECT CU1.CUS_ID,CU1.CUS_NAME,CU1.CUS_CONTACT
+FROM CUSTOMER_TABLE3 CU1
+WHERE CU1.CUS_ID IN
+         (SELECT C1.CUS_ID
+         FROM CONSIGNMENT_TABLE3 C1
+         WHERE C1.CID LIKE 'F%'
+         INTERSECT
+         SELECT C2.CUS_ID
+         FROM CONSIGNMENT_TABLE3 C2
+         WHERE C2.CID LIKE 'R%');
+
+
+
+2)supervisor of the consignment which has to be delivered today===============================================done
+  
+SELECT C.C_SUPER_ID,E.ENAME,C.CID
+FROM CONSIGNMENT_TABLE3 C,EMP_TABLE3 E,DISPATCH_TABLE3 D
+WHERE C.C_SUPER_ID=E.EID AND C.DIS_ID=D.DIS_ID AND to_date(D.DIS_DATE)=trunc(sysdate);
+
+
+3)what is the amount required to buy goods in each and every month-HOW MUCH IT HAS SPENT       ======done
+
+SELECT SUM(C.C_QUANTITY*C.COST_PER_PIECE),to_char(C.ARR_DATE,'MM-YYYY')
+FROM CONSIGNMENT_TABLE3 C
+WHERE C.CID LIKE 'R%'
+GROUP BY to_char(C.ARR_DATE,'MM-YYYY')
+ORDER BY 2;
+
+4)how much the firm earns in each month-HOW MUCH IT WILL GAIN   ===========done
+
+SELECT SUM(C.C_QUANTITY*C.COST_PER_PIECE),to_char(D.DIS_DATE,'MM-YYYY')
+FROM CONSIGNMENT_TABLE3 C,DISPATCH_TABLE3 D
+WHERE C.CID LIKE 'F%' AND C.DIS_ID=D.DIS_ID
+GROUP BY to_char(D.DIS_DATE,'MM-YYYY')
+ORDER BY 2;
+
+
+
+5)Select the employees with top 3 salaries  =======done
+
+SELECT *
+FROM EMP_TABLE3
+WHERE SALARY>=(SELECT MAX(SALARY) FROM EMP_TABLE3
+WHERE SALARY<(SELECT MAX(SALARY) FROM EMP_TABLE3
+WHERE SALARY<(SELECT MAX(SALARY) FROM EMP_TABLE3)));
+
+6)find the names of the firms which buys each type of clothes-----------------------------------------------
+SELECT C1.CTYPE,CU1.FIRM_NAME
+FROM CUSTOMER_TABLE3 CU1,CONSIGNMENT_TABLE3 C1
+WHERE CU1.CUS_ID=C1.CUS_ID AND C1.CID LIKE 'F%'
+GROUP BY C1.CTYPE,CU1.FIRM_NAME;
+
+
+7)find the MAXIMUm age of employee in each department
+
+SELECT S.SEC_NAME,MAX(E.AGE) AS AGE
+FROM SECTION_TABLE3 S,EMP_TABLE3 E
+WHERE S.SID=E.SID
+GROUP BY S.SEC_NAME;
+
+8)find the number of people in each department   ========done
+
+SELECT S.SEC_NAME,S.SID,COUNT(E.SID)
+FROM EMP_TABLE3 E,SECTION_TABLE3 S
+WHERE E.SID=S.SID
+GROUP BY S.SID,S.SEC_NAME
+ORDER BY S.SID;
+
+9)WHO IS THE SUPERVISOR OF PRERNA'S SUPERVISOR==========================================done
+
+SELECT E3.EID,E3.ENAME
+FROM EMP_TABLE3 E3
+WHERE E3.EID IN (SELECT E.SUPER
+                 FROM EMP_TABLE3 E
+                 WHERE E.EID IN (SELECT E1.SUPER
+                                 FROM EMP_TABLE3 E1
+                                 WHERE E1.ENAME='PRERNA'));  
+
+
+10)bill==========================================================================================done
+
+SELECT CUS.CUS_ID,CUS.CUS_NAME,FIRM_NAME,C.CID,C.CTYPE,C.CNMAE,C.C_QUANTITY,C.COST_PER_PIECE,(C.C_QUANTITY*C.COST_PER_PIECE) AS TOTAL
+FROM CONSIGNMENT_TABLE3 C,CUSTOMER_TABLE3 CUS
+WHERE C.CUS_ID=CUS.CUS_ID;
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+SELECT SUM(c.cquantity*c.cost_per_piece) AS AMOUNT,YEAR(c.arr_date) AS YEAR,MONTH(c.arr_date) AS MONTH
+FROM consignment c
+WHERE c.cid LIKE 'R%'
+GROUP BY MONTH(c.arr_date),YEAR(c.arr_date)
+ORDER BY 2;
+
+
+SELECT C.superid,E.ename,C.cid
+FROM consignment C,employee E,dispatch D
+WHERE C.superid=E.eid AND C.dis_id=D.dis_id AND C.cid LIKE "F%" AND  D.dis_date=CURDATE();
+ 
